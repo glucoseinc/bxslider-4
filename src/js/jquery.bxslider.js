@@ -1604,4 +1604,4 @@
     return this;
   };
 
-})(jQuery);
+})(require('jquery'));
