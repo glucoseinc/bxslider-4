@@ -34,5 +34,6 @@
     "bxslider",
     "jQuery",
     "plugin"
-  ]
+  ],
+  "main": "./dist/jquery.bxslider.js"
 }
