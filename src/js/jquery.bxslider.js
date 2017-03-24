@@ -74,6 +74,7 @@
     autoHover: false,
     autoDelay: 0,
     autoSlideForOnePage: false,
+    resetAutoOnClick: false,
 
     // CAROUSEL
     minSlides: 1,
@@ -742,6 +743,7 @@
       if (slider.controls.el.hasClass('disabled')) { return; }
       // if auto show is running, stop it
       if (slider.settings.auto && slider.settings.stopAutoOnClick) { el.stopAuto(); }
+      if (slider.settings.resetAutoOnClick) { el.resetAuto(); }
       el.goToNextSlide();
     };
 
@@ -756,6 +758,7 @@
       if (slider.controls.el.hasClass('disabled')) { return; }
       // if auto show is running, stop it
       if (slider.settings.auto && slider.settings.stopAutoOnClick) { el.stopAuto(); }
+      if (slider.settings.resetAutoOnClick) { el.resetAuto(); }
       el.goToPrevSlide();
     };
 
@@ -795,6 +798,7 @@
       }
       // if auto show is running, stop it
       if (slider.settings.auto  && slider.settings.stopAutoOnClick) { el.stopAuto(); }
+      if (slider.settings.resetAutoOnClick) { el.resetAuto(); }
       pagerLink = $(e.currentTarget);
       if (pagerLink.attr('data-slide-index') !== undefined) {
         pagerIndex = parseInt(pagerLink.attr('data-slide-index'));
@@ -1489,6 +1493,20 @@
       slider.interval = null;
       // if auto controls are displayed and preventControlUpdate is not true
       if (slider.settings.autoControls && preventControlUpdate !== true) { updateAutoControls('start'); }
+    };
+
+    /**
+     * Reset auto show
+     *
+     * @param preventControlUpdate (boolean)
+     *  - if true, auto controls state will not be updated
+     */
+    el.resetAuto = function() {
+      // if no interval exists, disregard call
+      if (!slider.interval) { return; }
+
+      el.stopAuto(true)
+      el.startAuto(true)
     };
 
     /**
